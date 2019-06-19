@@ -1,0 +1,5 @@
+---
+ - hosts: all
+   tasks:
+     - name: print hostname 
+       command: hostname
