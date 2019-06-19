@@ -7,6 +7,12 @@
         name: mysql-server
         state: present
         update_cache: yes
-     - name: enable and start mysql service
-       command: service mysql start && service mysql enable
+     - name: start mysql service
+       service:
+         name: mysql
+         state: started
+     - name: Enable mysql service on boot
+       service:
+         name: mysql
+         state: enabled
 
