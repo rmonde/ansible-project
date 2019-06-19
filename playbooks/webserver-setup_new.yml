@@ -1,0 +1,26 @@
+---
+ - hosts: web
+   become: true
+   tasks:
+   # - name: Update the repository cache and update package "nginx" to latest version using default release squeeze-backport
+   #    apt: 
+   #     name: nginx 
+   #     state: present
+   #     update_cache: yes
+   #  - name: Start and enable nginx on the server
+   #    service:
+   #      name: nginx
+   #      state: started
+   #      enabled: yes
+   #    become: yes
+     - name: install below list of packages
+       apt: name={{item}} state=present update_cache=yes
+       with_items:
+         - nginx
+         - python-pip
+         - python-virtualenv
+       notify: nginx-restart
+       
+       handlers:
+         - name: nginx-restart
+           service: name=nginx state=restarted
